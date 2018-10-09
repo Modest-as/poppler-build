@@ -1,0 +1,24 @@
+#!/bin/bash
+
+cd /mount
+
+rm -rf *
+
+wget https://poppler.freedesktop.org/poppler-0.69.0.tar.xz
+
+tar xvf poppler-0.69.0.tar.xz && rm poppler-0.69.0.tar.xz
+
+git clone git://git.freedesktop.org/git/poppler/test /mount/test
+
+cd poppler-0.69.0
+
+mkdir build && cd build
+
+cmake  -DCMAKE_BUILD_TYPE=Release   \
+       -DCMAKE_INSTALL_PREFIX=/usr  \
+       -DTESTDATADIR=$PWD/testfiles \
+       -DENABLE_XPDF_HEADERS=ON     \
+       -DTESTDATADIR=/mount/test    \
+       ..
+
+make

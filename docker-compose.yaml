@@ -1,0 +1,8 @@
+version: '3'
+services:
+  compile_container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+    - ./mount:/mount
